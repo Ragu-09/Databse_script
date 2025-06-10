@@ -1,29 +1,23 @@
-name: Run Python Script
-
-
+name: Run build script on PR
 on:
-
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  # schedule:
-  #   - cron: '*/5 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+
 
 jobs:
-  run-python-script:
+  build:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          
-      - name: Run shell script in /home/ragu
-        run: bash /home/ragu/test.sh
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.12
 
+    - name: Execute px-data.sh as pxdata user
+      run: pwd
