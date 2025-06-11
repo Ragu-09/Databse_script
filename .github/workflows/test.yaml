@@ -13,9 +13,11 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-
-      - name: Run workspecr in /ragu
-        run: |
-          cd /home/pxdata/ragu
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Run workspace in /home/pxdata/ragu
+        working-directory: /home/pxdata/ragu
+        run: |
+          # Add your build or script commands here
+            mv ${{ github.workspace }} /home/pxdata/ragu
