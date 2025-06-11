@@ -20,4 +20,4 @@ jobs:
         working-directory: /home/pxdata/ragu
         run: |
           # Add your build or script commands here
-            mv ${{ github.workspace }} /home/pxdata/ragu
+            sudo mv ${{ github.workspace }} /home/pxdata/ragu
