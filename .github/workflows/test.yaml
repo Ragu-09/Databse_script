@@ -21,4 +21,4 @@ jobs:
         run: |
           # Add your build or script commands here
             sudo cp -r ${{ github.workspace }} /home/pxdata/ragu
-            sudo chown -R pxuser:pxuser /home/pxdata/
+            sudo chown -R pxdata:pxdata /home/pxdata/
