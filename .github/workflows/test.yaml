@@ -22,4 +22,4 @@ jobs:
           # Add your build or script commands here
             sudo cp -r ${{ github.workspace }} /home/pxdata/ragu
             sudo chown -R pxdata:pxdata /home/pxdata/
-            sudo chmod 777 -R pxdata:pxdata /home/pxdata/
+            sudo chmod 777 -R /home/pxdata/
