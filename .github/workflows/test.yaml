@@ -10,7 +10,7 @@ on:
     inputs:
       tag:
         description: 'Tag to deploy (optional)'
-        required: true
+        required: false
  
 jobs:
   build:
