@@ -1,25 +1,58 @@
 name: Run build script on PR
 on:
-  workflow_dispatch:
   push:
     branches:
-      - main
-    paths:
-      - 'ragu/test'
+      - dev/IAM-2751
+
     
 
-
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to deploy (optional)'
+        required: true
+ 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: iam-dev-github-slave
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch user-specified tag or latest tag
+        run: |
+          set -e  # Exit on error
+          
+          # Navigate to the workspace
+          cd ${{ github.workspace }}
+
+          # Fetch all tags and branches
+          git fetch --all --tags
+
+          # Check if the user provided a tag
+          USER_TAG=${{ github.event.inputs.tag }}  # Replace with your input mechanism
+          echo "User-specified tag: $USER_TAG"
+
+          if [ -n "$USER_TAG" ] && git rev-parse "$USER_TAG" >/dev/null 2>&1; then
+            echo "User-specified tag exists: $USER_TAG"
+            git checkout "$USER_TAG"
+          else
+            echo "User-specified tag not found or not provided. Fetching the latest tag."
+            LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "")
+            if [ -n "$LATEST_TAG" ]; then
+              echo "Latest tag found: $LATEST_TAG"
+              git checkout "$LATEST_TAG"
+            else
+              echo "No tags found. Fetching the latest code from the main branch."
+              git checkout main
+              git pull origin main
+            fi
+          fi
 
       - name: Run workspace in /home/pxdata/ragu
-        working-directory: /home/pxdata/ragu
         run: |
           # Add your build or script commands here
-            sudo cp -r ${{ github.workspace }} /home/pxdata/ragu
-            sudo chown -R pxdata:pxdata /home/pxdata/
-            sudo chmod 777 -R /home/pxdata/
+            sudo  cp -r ${{ github.workspace }} /home/pxuser/
+
+         
