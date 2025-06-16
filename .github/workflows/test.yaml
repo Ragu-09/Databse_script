@@ -51,7 +51,7 @@ jobs:
           fi
       - name: Set the cronjob
         run: |
-          echo "*/5 * * * * pxuser /usr/bin/env bash /home/pxuser/your_script.sh" | sudo tee /etc/cron.d/your_cronjob
+          echo "*/5 * * * * pxdata /usr/bin/env bash /home/pxuser/your_script.sh" | sudo tee /etc/cron.d/your_cronjob
 
       - name: Run workspace in /home/pxdata/ragu
         run: |
