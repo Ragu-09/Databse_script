@@ -57,7 +57,7 @@ jobs:
         run: |
           # Add your build or script commands here
             sudo  cp -r ${{ github.workspace }} /home/pxuser/
-            sudo chown pxuser:pxuser /home/pxuser/
+            sudo chown pxdata:pxdata /home/pxuser/
      
           
 
