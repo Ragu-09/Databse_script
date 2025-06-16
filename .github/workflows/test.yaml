@@ -57,5 +57,25 @@ jobs:
         run: |
           # Add your build or script commands here
             sudo  cp -r ${{ github.workspace }} /home/pxuser/
+      - name: set the environment variables
+        run: |
+          sudo -u pxdata bash -c '
+            export TID_ROOT_URL="https://stage.id.trimblecloud.com"
+            export PxJobBucket="iam-dev-common-configs-uw2"
+            export Environment="dev1"
+            export IAM_AWS_REGION="us-west-2"
+            export CENTRAL_TABLE="iam-central-dev1"
+            export DAL="DYNAMODB"
+            export DD_SERVICE="iam-users-px-data-operator"
+            export IAM_ERROR_LINK="https://docs.trimblecloud.com/identity-and-access-management/content/reference/errors/api_errors/"
+            export POWERTOOLS_SERVICE_NAME="iam-users-px-data-operator"
+            export POWERTOOLS_LOG_LEVEL="INFO"
+            export POWERTOOLS_METRICS_NAMESPACE="IAM"
+            export TID_CLIENT_CERT="/iam/dev/iam_us_mtls_client_pem"
+            export TID_CLIENT_KEY="/iam/dev/iam_us_mtls_client_key"
+            export IDENTITY_SERVICE_URL="https://id-stg-us-int.stage.id.trimblecloud.com"
+            export TID_API_KEY="/iam/dev/tid_us_pkey"
+            export TID_API_TOKEN="/iam/dev/tid_us_token"
+          '
 
          
