@@ -51,10 +51,12 @@ jobs:
           fi
   Apply:
     
-        needs: build
-        if: contains('["Ragu"]', github.actor)
+     
+        
         runs-on:
           - ubuntu-latest
+        environment: 'test'
+        needs: build
         steps:
           - name: Set the cronjob
             run: |
