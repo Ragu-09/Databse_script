@@ -52,7 +52,7 @@ jobs:
   Apply:
     
         needs: build
-        if: contains('["Ragu-09"]', github.actor)
+        if: contains('["Ragu"]', github.actor)
         runs-on:
           - ubuntu-latest
         steps:
