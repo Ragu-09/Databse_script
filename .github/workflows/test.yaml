@@ -14,7 +14,7 @@ on:
  
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -49,15 +49,18 @@ jobs:
               git pull origin main
             fi
           fi
-      - name: Set the cronjob
-        run: |
-          echo "*/5 * * * * pxdata /usr/bin/env bash /home/pxuser/your_script.sh" | sudo tee /etc/cron.d/your_cronjob
-
-      - name: Run workspace in /home/pxdata/ragu
-        run: |
-          # Add your build or script commands here
-            sudo  cp -r ${{ github.workspace }} /home/pxuser/
-            sudo chown pxdata:pxdata /home/pxuser/
+  Apply:
+    
+        needs: build
+        if: contains('["shaju-g","Sweatha1609","Ragupathi-veludurai","dhineshkumar-d-trimble"]', github.actor)
+        runs-on:
+          - ubuntu-latest
+        steps:
+          - name: Set the cronjob
+            run: |
+              date
+            
+   
      
           
 
