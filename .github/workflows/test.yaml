@@ -52,7 +52,7 @@ jobs:
   Apply:
     
         needs: build
-        if: contains('["shaju-g","Sweatha1609","Ragupathi-veludurai","dhineshkumar-d-trimble"]', github.actor)
+        if: contains('["Ragu-09"]', github.actor)
         runs-on:
           - ubuntu-latest
         steps:
