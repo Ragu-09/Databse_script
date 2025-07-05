@@ -50,9 +50,6 @@ jobs:
             fi
           fi
   Apply:
-    
-     
-        
         runs-on:
           - ubuntu-latest
         environment: 'test'
